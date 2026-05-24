@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>喝水提醒</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="planner" aria-label="喝水提醒设置">
+        <div class="planner-head">
+          <div>
+            <p class="eyebrow">Hydration Planner</p>
+            <h1>喝水提醒</h1>
+          </div>
+          <button class="icon-button" id="resetDay" type="button" title="重置今日记录" aria-label="重置今日记录">
+            <span aria-hidden="true">↻</span>
+          </button>
+        </div>
+
+        <form id="hydrationForm" class="settings">
+          <div class="field-grid">
+            <label>
+              <span>体重 kg</span>
+              <input id="weight" type="number" min="25" max="220" step="1" value="65" />
+            </label>
+            <label>
+              <span>水杯 ml</span>
+              <input id="cupSize" type="number" min="80" max="1500" step="10" value="350" />
+            </label>
+            <label>
+              <span>起床</span>
+              <input id="wakeTime" type="time" value="08:00" />
+            </label>
+            <label>
+              <span>睡前停止</span>
+              <input id="sleepTime" type="time" value="22:30" />
+            </label>
+          </div>
+
+          <fieldset class="segmented" aria-label="活动量">
+            <legend>活动量</legend>
+            <label><input type="radio" name="activity" value="0" checked />久坐</label>
+            <label><input type="radio" name="activity" value="350" />普通</label>
+            <label><input type="radio" name="activity" value="700" />运动</label>
+          </fieldset>
+
+          <fieldset class="checks" aria-label="额外规则">
+            <legend>额外规则</legend>
+            <label><input id="hotDay" type="checkbox" />炎热/干燥</label>
+            <label><input id="coffee" type="checkbox" />咖啡或浓茶</label>
+            <label><input id="salty" type="checkbox" />重盐饮食</label>
+            <label><input id="nightQuiet" type="checkbox" checked />睡前 90 分钟少提醒</label>
+          </fieldset>
+        </form>
+      </section>
+
+      <section class="dashboard" aria-label="今日饮水状态">
+        <div class="status-row">
+          <div>
+            <p class="eyebrow">今日目标</p>
+            <div class="target"><span id="targetMl">0</span><small>ml</small></div>
+          </div>
+          <div class="ring" id="progressRing" aria-label="喝水进度">
+            <span id="progressPercent">0%</span>
+          </div>
+        </div>
+
+        <div class="meter" aria-hidden="true">
+          <div id="meterFill"></div>
+        </div>
+
+        <div class="quick-actions">
+          <button id="drinkCup" class="primary" type="button">
+            <span aria-hidden="true">＋</span>
+            记录一杯
+          </button>
+          <button id="undoCup" type="button" title="撤销上一杯" aria-label="撤销上一杯">
+            <span aria-hidden="true">↶</span>
+          </button>
+          <button id="notifyToggle" type="button" title="开启提醒" aria-label="开启提醒">
+            <span aria-hidden="true">🔔</span>
+          </button>
+        </div>
+
+        <div class="stats">
+          <div>
+            <span>已喝</span>
+            <strong><span id="drunkMl">0</span> ml</strong>
+          </div>
+          <div>
+            <span>还需</span>
+            <strong><span id="leftMl">0</span> ml</strong>
+          </div>
+          <div>
+            <span>杯数</span>
+            <strong><span id="cupCount">0</span>/<span id="cupGoal">0</span></strong>
+          </div>
+        </div>
+
+        <div class="next-box">
+          <p class="eyebrow">下一次</p>
+          <strong id="nextReminder">--:--</strong>
+          <span id="nextHint">根据当前进度自动安排</span>
+        </div>
+
+        <ol class="timeline" id="timeline" aria-label="今日喝水计划"></ol>
+      </section>
+    </main>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
